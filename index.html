@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Свет в ваших проектах — анкета перед встречей в шоуруме Maytoni</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%237C54FE'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23fff' opacity='.9'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Suisse Intl";src:url("assets/fonts/SuisseIntl-Light.woff2") format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Suisse Intl";src:url("assets/fonts/SuisseIntl-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Suisse Intl";src:url("assets/fonts/SuisseIntl-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Suisse Intl";src:url("assets/fonts/SuisseIntl-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --violet:#7C54FE;
+  --white:#FFFFFF;
+  --grey-light:#F0F0F0;
+  --grey-medium:#E4E4E4;
+  --grey-dark:#787878;
+  --black:#000000;
+  --font:"Suisse Intl","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--white);color:var(--black);font-family:var(--font);font-size:17px;line-height:1.5;font-weight:400}
+
+/* прогресс */
+.progress{position:sticky;top:0;z-index:10;background:var(--white);border-bottom:1px solid var(--grey-medium)}
+.progress-inner{max-width:760px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px}
+.track{flex:1;height:2px;background:var(--grey-medium);position:relative}
+.fill{position:absolute;left:0;top:-1px;height:4px;width:0;background:var(--violet);transition:width .35s ease}
+.count{font-size:14px;font-weight:300;color:var(--grey-dark);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* шапка */
+.hero{position:relative;overflow:hidden;background:var(--violet);color:var(--white)}
+.beam{position:absolute;border-radius:50%;pointer-events:none}
+.beam.b1{width:520px;height:520px;top:-260px;right:-80px;background:radial-gradient(circle,rgba(255,255,255,.45),rgba(255,255,255,0) 62%)}
+.beam.b2{width:420px;height:420px;bottom:-280px;right:180px;background:radial-gradient(circle,rgba(255,255,255,.28),rgba(255,255,255,0) 62%)}
+.beam.b3{width:300px;height:300px;top:-60px;right:120px;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 60%)}
+.hero-inner{position:relative;max-width:760px;margin:0 auto;padding:40px 24px 56px}
+.logo{display:block;height:44px;width:auto;margin-left:-8px;margin-bottom:64px}
+.eyebrow{font-size:13px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;margin:0 0 16px;opacity:.85}
+h1{font-weight:300;font-size:clamp(44px,8vw,76px);line-height:1;letter-spacing:-.02em;margin:0 0 28px}
+h1 b{font-weight:700}
+.lead{font-weight:300;font-size:19px;max-width:34em;margin:0 0 20px}
+.meta{margin:0;font-size:15px;font-weight:400;line-height:1.7}
+
+main{max-width:760px;margin:0 auto;padding:0 24px 96px}
+
+/* блоки */
+section{margin-top:64px}
+.section-head{border-top:2px solid var(--violet);padding-top:16px;margin-bottom:8px}
+.section-num{font-size:13px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:var(--violet);margin:0 0 6px}
+h2{font-weight:700;font-size:30px;line-height:1.1;margin:0}
+.section-note{color:var(--grey-dark);font-weight:300;margin:8px 0 0}
+
+fieldset{border:0;margin:40px 0 0;padding:0;min-width:0}
+.section-head+fieldset{margin-top:28px}
+legend{padding:0;font-weight:500;font-size:19px;line-height:1.35;display:flex;gap:14px;width:100%}
+legend .n{color:var(--violet);font-weight:300;min-width:1.7em;font-variant-numeric:tabular-nums}
+.indent{margin-left:calc(1.7em + 14px)}
+.hint{color:var(--grey-dark);font-size:14px;font-weight:300;margin-top:6px;margin-bottom:12px}
+.situation{background:var(--grey-light);border-left:2px solid var(--violet);padding:16px 18px;margin-top:12px;margin-bottom:14px;font-weight:300}
+
+.options{display:grid;gap:6px}
+.opt{position:relative;display:flex;gap:14px;align-items:flex-start;cursor:pointer;padding:12px 16px;background:var(--grey-light);border:1px solid var(--grey-light);transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--violet)}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.mark{flex:none;width:18px;height:18px;margin-top:2px;border:1.5px solid var(--grey-dark);background:var(--white);position:relative;transition:all .15s}
+.opt input[type=radio]+.mark{border-radius:50%}
+.opt input:checked+.mark{border-color:var(--violet);background:var(--violet)}
+.opt input[type=radio]:checked+.mark::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--white)}
+.opt input[type=checkbox]:checked+.mark::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--white);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.opt:has(input:checked){background:var(--white);border-color:var(--violet)}
+.opt input:focus-visible+.mark{outline:2px solid var(--violet);outline-offset:3px}
+.opt:has(input:disabled){cursor:default}
+.opt:has(input:disabled):hover{border-color:var(--grey-light)}
+.opt input:disabled~.txt{opacity:.4}
+.txt b{font-weight:700}
+.txt small{display:block;color:var(--grey-dark);font-weight:300;font-size:15px;margin-top:2px}
+
+/* шкала */
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.scale .opt{justify-content:center;padding:14px 0;font-size:20px;font-weight:500}
+.scale .mark{display:none}
+.scale .opt:has(input:checked){background:var(--violet);color:var(--white)}
+.scale .opt:has(input:focus-visible){outline:2px solid var(--violet);outline-offset:2px}
+.scale-labels{display:flex;justify-content:space-between;gap:16px;margin-top:8px;font-size:14px;font-weight:300;color:var(--grey-dark)}
+.scale-labels span:last-child{text-align:right}
+
+textarea{width:100%;min-height:110px;font:inherit;font-weight:300;color:var(--black);background:var(--grey-light);border:1px solid var(--grey-light);border-radius:0;padding:14px 16px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--violet);background:var(--white)}
+
+.err{display:none;color:var(--violet);font-size:14px;font-weight:500;margin-top:8px}
+fieldset.invalid .err{display:block}
+fieldset.invalid .opt{border-color:var(--violet)}
+
+.submit-row{margin-top:64px;padding-top:24px;border-top:1px solid var(--grey-medium)}
+button{font:inherit;font-weight:500;font-size:17px;cursor:pointer;background:var(--violet);color:var(--white);border:0;border-radius:0;padding:18px 36px;transition:background .15s}
+button:hover{background:var(--black)}
+button:focus-visible{outline:2px solid var(--black);outline-offset:3px}
+button:disabled{opacity:.5;cursor:wait}
+.form-msg{margin:14px 0 0;font-size:15px;color:var(--violet);font-weight:500}
+
+/* финальный экран */
+.thanks{display:none;position:relative;overflow:hidden;background:var(--violet);color:var(--white);margin:48px 0 0;padding:56px 40px}
+.thanks h2{font-weight:300;font-size:clamp(34px,6vw,52px);line-height:1.05;margin:0 0 20px}
+.thanks h2 b{font-weight:700}
+.thanks p{position:relative;font-weight:300;max-width:34em;margin:0 0 12px}
+
+footer{max-width:760px;margin:0 auto;padding:24px;border-top:1px solid var(--grey-medium);font-size:13px;font-weight:300;color:var(--grey-dark);letter-spacing:.05em}
+
+@media (max-width:600px){
+  body{font-size:16px}
+  .indent{margin-left:0}
+  legend{gap:10px;font-size:18px}
+  .logo{margin-bottom:44px;height:36px;margin-left:-6px}
+  .hero-inner{padding:32px 20px 44px}
+  main,footer{padding-left:20px;padding-right:20px}
+  .thanks{padding:40px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true">
+  <div class="progress-inner">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <span class="count" id="count">0 из 14</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="beam b1"></div><div class="beam b2"></div><div class="beam b3"></div>
+  <div class="hero-inner">
+    <img class="logo" src="assets/logo-white.png" alt="Maytoni">
+    <p class="eyebrow">Анкета перед встречей</p>
+    <h1>Свет в&nbsp;ваших <b>проектах</b></h1>
+    <p class="lead">Скоро мы встретимся в шоуруме Maytoni. Чтобы встреча была про ваши задачи, а не про каталог, ответьте, пожалуйста, на несколько вопросов.</p>
+    <p class="meta">Встречу проведёт тренер-эксперт Maytoni.<br>Заполнение займёт около 5 минут. Анкета анонимная.</p>
+  </div>
+</header>
+
+<main>
+<form id="survey" novalidate>
+
+  <!-- БЛОК 1 -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">Блок 1</p>
+      <h2>Немного о вас</h2>
+    </div>
+
+    <fieldset data-q="q1" data-required>
+      <legend><span class="n">1</span><span>На каком курсе вы учитесь?</span></legend>
+      <div class="options indent" style="margin-top:14px">
+        <label class="opt"><input type="radio" name="q1" value="Дизайн интерьера"><span class="mark"></span><span class="txt">Дизайн интерьера</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Декорирование и стилизация"><span class="mark"></span><span class="txt">Декорирование и стилизация интерьеров</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Оба курса"><span class="mark"></span><span class="txt">Учусь на обоих курсах</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Другой курс"><span class="mark"></span><span class="txt">Другой курс</span></label>
+      </div>
+      <p class="err indent">Выберите вариант ответа.</p>
+    </fieldset>
+
+    <fieldset data-q="q2" data-required>
+      <legend><span class="n">2</span><span>Где вы сейчас в обучении?</span></legend>
+      <div class="options indent" style="margin-top:14px">
+        <label class="opt"><input type="radio" name="q2" value="Первые месяцы"><span class="mark"></span><span class="txt">Первые месяцы</span></label>
+        <label class="opt"><input type="radio" name="q2" value="Середина курса"><span class="mark"></span><span class="txt">Середина курса</span></label>
+        <label class="opt"><input type="radio" name="q2" value="Дипломный проект"><span class="mark"></span><span class="txt">Работаю над дипломным проектом</span></label>
+        <label class="opt"><input type="radio" name="q2" value="Курс окончен"><span class="mark"></span><span class="txt">Курс уже позади</span></label>
+      </div>
+      <p class="err indent">Выберите вариант ответа.</p>
+    </fieldset>
+
+    <fieldset data-q="q3" data-required>
+      <legend><span class="n">3</span><span>Какой у вас опыт с проектами?</span></legend>
+      <div class="options indent" style="margin-top:14px">
+        <label class="opt"><input type="radio" name="q3" value="Только учебные"><span class="mark"></span><span class="txt">Пока только учебные проекты</span></label>
+        <label class="opt"><input type="radio" name="q3" value="1–3 реальных заказа"><span class="mark"></span><span class="txt">Были 1–3 реальных заказа</span></label>
+        <label class="opt"><input type="radio" name="q3" value="Регулярно с заказчиками"><span class="mark"></span><span class="txt">Работаю с заказчиками регулярно</span></label>
+        <label class="opt"><input type="radio" name="q3" value="Смежная сфера"><span class="mark"></span><span class="txt">Работаю в смежной сфере<small>мебель, ремонт, продажи интерьерных товаров</small></span></label>
+      </div>
+      <p class="err indent">Выберите вариант ответа.</p>
+    </fieldset>
+  </section>
+
+  <!-- БЛОК 2 -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">Блок 2</p>
+      <h2>Свет в вашей работе</h2>
+    </div>
+
+    <fieldset data-q="q4" data-required>
+      <legend><span class="n">4</span><span>Насколько уверенно вы сейчас подбираете свет для проекта?</span></legend>
+      <div class="indent" style="margin-top:14px">
+        <div class="scale">
+          <label class="opt"><input type="radio" name="q4" value="1" aria-label="1 — не знаю, с чего начать"><span class="mark"></span><span class="txt">1</span></label>
+          <label class="opt"><input type="radio" name="q4" value="2"><span class="mark"></span><span class="txt">2</span></label>
+          <label class="opt"><input type="radio" name="q4" value="3"><span class="mark"></span><span class="txt">3</span></label>
+          <label class="opt"><input type="radio" name="q4" value="4"><span class="mark"></span><span class="txt">4</span></label>
+          <label class="opt"><input type="radio" name="q4" value="5" aria-label="5 — уверенно предлагаю решение заказчику"><span class="mark"></span><span class="txt">5</span></label>
+        </div>
+        <div class="scale-labels"><span>1 — не знаю, с чего начать</span><span>5 — уверенно предлагаю решение заказчику</span></div>
+      </div>
+      <p class="err indent">Выберите оценку.</p>
+    </fieldset>
+
+    <fieldset data-q="q5" data-required data-exclusive="Пока почти ничего">
+      <legend><span class="n">5</span><span>Что из этого вы уже уверенно применяете в проектах?</span></legend>
+      <p class="hint indent">Можно выбрать несколько вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q5" value="Тёплый и холодный свет"><span class="mark"></span><span class="txt">Учитываю, как тёплый и холодный свет меняют восприятие интерьера</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Уровни света"><span class="mark"></span><span class="txt">Планирую в комнате несколько уровней света: общий, акцентный, декоративный</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Светильник под задачу зоны"><span class="mark"></span><span class="txt">Выбираю светильник под задачу зоны: над столом, у дивана, в коридоре</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Угол рассеивания и цветопередача"><span class="mark"></span><span class="txt">Понимаю, что означают угол рассеивания и индекс цветопередачи</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Выводы до ремонта"><span class="mark"></span><span class="txt">Заранее планирую выводы под светильники до начала ремонта</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Трековые системы"><span class="mark"></span><span class="txt">Знаю, как устроены трековые системы</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Световые сценарии"><span class="mark"></span><span class="txt">Продумываю световые сценарии</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Пока почти ничего"><span class="mark"></span><span class="txt">Пока почти ничего из этого</span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+
+    <fieldset data-q="q6" data-required>
+      <legend><span class="n">6</span><span>Как бы вы поступили?</span></legend>
+      <p class="hint indent">Это не проверка: эту ситуацию мы разберём вместе на встрече.</p>
+      <div class="situation indent">В кухне-гостиной по всему потолку равномерно стоят встраиваемые светильники холодного света. Света достаточно, но вечером заказчикам неуютно.</div>
+      <div class="options indent">
+        <label class="opt"><input type="radio" name="q6" value="Больше встраиваемых"><span class="mark"></span><span class="txt">Добавлю встраиваемых светильников, чтобы свет стал ровнее</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Только тёплые лампы"><span class="mark"></span><span class="txt">Заменю лампы на тёплые, расстановку оставлю прежней</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Тёплый свет по зонам"><span class="mark"></span><span class="txt">Сделаю тёплый свет по зонам с отдельным включением каждой</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Одна люстра в центре"><span class="mark"></span><span class="txt">Уберу встраиваемые светильники и повешу одну люстру в центре</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Не знаю"><span class="mark"></span><span class="txt">Пока не знаю</span></label>
+      </div>
+      <p class="err indent">Выберите вариант ответа.</p>
+    </fieldset>
+
+    <fieldset data-q="q7" data-required data-max="3">
+      <legend><span class="n">7</span><span>Что в работе со светом даётся вам сложнее всего?</span></legend>
+      <p class="hint indent">Выберите до трёх вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q7" value="Размер светильника"><span class="mark"></span><span class="txt">Подобрать размер светильника под комнату и высоту потолка</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="Сочетание светильников"><span class="mark"></span><span class="txt">Сочетать несколько светильников в одном пространстве</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="Сколько света и где"><span class="mark"></span><span class="txt">Понять, сколько света нужно и где его расположить</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="Выбор цветовой температуры"><span class="mark"></span><span class="txt">Выбрать цветовую температуру</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="Встроенный свет и лента"><span class="mark"></span><span class="txt">Работать со встроенным светом и светодиодной лентой</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="Сценарии и управление"><span class="mark"></span><span class="txt">Продумать сценарии и управление светом</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="Под концепцию и бюджет"><span class="mark"></span><span class="txt">Найти светильник под концепцию и бюджет</span></label>
+        <label class="opt"><input type="checkbox" name="q7" value="Объяснить заказчику"><span class="mark"></span><span class="txt">Объяснить заказчику, почему выбран именно этот свет</span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+  </section>
+
+  <!-- БЛОК 3 -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">Блок 3</p>
+      <h2>Как вы выбираете свет</h2>
+    </div>
+
+    <fieldset data-q="q8" data-required data-exclusive="Пока не подбирал">
+      <legend><span class="n">8</span><span>Где вы обычно ищете светильники для проектов?</span></legend>
+      <p class="hint indent">Можно выбрать несколько вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q8" value="Pinterest и соцсети"><span class="mark"></span><span class="txt">Pinterest и соцсети</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="Маркетплейсы"><span class="mark"></span><span class="txt">Маркетплейсы</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="Сайты брендов"><span class="mark"></span><span class="txt">Сайты брендов</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="Шоурумы"><span class="mark"></span><span class="txt">Шоурумы</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="3D-библиотеки"><span class="mark"></span><span class="txt">Библиотеки 3D-моделей для визуализации</span></label>
+        <label class="opt"><input type="checkbox" name="q8" value="Пока не подбирал"><span class="mark"></span><span class="txt">Пока не подбирал(а) светильники</span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+
+    <fieldset data-q="q9" data-required data-max="2" data-exclusive="Пока сложно сказать">
+      <legend><span class="n">9</span><span>Что для вас будет важно при выборе бренда освещения для проектов?</span></legend>
+      <p class="hint indent">Выберите до двух вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q9" value="Дизайн и стиль"><span class="mark"></span><span class="txt">Дизайн и узнаваемый стиль</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="Разные ценовые сегменты"><span class="mark"></span><span class="txt">Выбор в разных ценовых сегментах</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="Наличие и сроки"><span class="mark"></span><span class="txt">Наличие и сроки поставки</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="3D-модели и материалы"><span class="mark"></span><span class="txt">3D-модели и материалы для визуализаций</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="Помощь в подборе и расчёте"><span class="mark"></span><span class="txt">Помощь специалистов в подборе и расчёте света</span></label>
+        <label class="opt"><input type="checkbox" name="q9" value="Пока сложно сказать"><span class="mark"></span><span class="txt">Пока сложно сказать</span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+
+    <fieldset data-q="q10" data-required>
+      <legend><span class="n">10</span><span>Знакомы ли вам бренды Maytoni и Freya?</span></legend>
+      <div class="options indent" style="margin-top:14px">
+        <label class="opt"><input type="radio" name="q10" value="Использует в проектах"><span class="mark"></span><span class="txt">Знаю и уже использовал(а) в проектах</span></label>
+        <label class="opt"><input type="radio" name="q10" value="Знает, не использует"><span class="mark"></span><span class="txt">Знаю, но в проектах пока не использовал(а)</span></label>
+        <label class="opt"><input type="radio" name="q10" value="Слышал название"><span class="mark"></span><span class="txt">Только слышал(а) название</span></label>
+        <label class="opt"><input type="radio" name="q10" value="Впервые слышит"><span class="mark"></span><span class="txt">Впервые слышу</span></label>
+      </div>
+      <p class="err indent">Выберите вариант ответа.</p>
+    </fieldset>
+  </section>
+
+  <!-- БЛОК 4 -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">Блок 4</p>
+      <h2>Какой будет встреча</h2>
+    </div>
+
+    <fieldset data-q="q11" data-required data-max="2">
+      <legend><span class="n">11</span><span>С чем вы хотите уйти со встречи?</span></legend>
+      <p class="hint indent">Выберите до двух вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q11" value="С чего начинать"><span class="mark"></span><span class="txt">Понимание, с чего начинать работу со светом в проекте</span></label>
+        <label class="opt"><input type="checkbox" name="q11" value="Идеи для проекта"><span class="mark"></span><span class="txt">Идеи для текущего или дипломного проекта</span></label>
+        <label class="opt"><input type="checkbox" name="q11" value="Решения и тенденции"><span class="mark"></span><span class="txt">Представление о современных решениях и тенденциях</span></label>
+        <label class="opt"><input type="checkbox" name="q11" value="Чем помогает бренд"><span class="mark"></span><span class="txt">Знание, чем бренд освещения может помочь дизайнеру в работе</span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+
+    <fieldset data-q="q12" data-required data-max="2">
+      <legend><span class="n">12</span><span>Разбор каких объектов будет полезен для ваших проектов, учебных или реальных?</span></legend>
+      <p class="hint indent">Выберите до двух вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q12" value="Квартира"><span class="mark"></span><span class="txt">Квартира</span></label>
+        <label class="opt"><input type="checkbox" name="q12" value="Загородный дом"><span class="mark"></span><span class="txt">Загородный дом</span></label>
+        <label class="opt"><input type="checkbox" name="q12" value="Ресторан или кафе"><span class="mark"></span><span class="txt">Ресторан или кафе</span></label>
+        <label class="opt"><input type="checkbox" name="q12" value="Отель"><span class="mark"></span><span class="txt">Отель</span></label>
+        <label class="opt"><input type="checkbox" name="q12" value="Офис"><span class="mark"></span><span class="txt">Офис</span></label>
+        <label class="opt"><input type="checkbox" name="q12" value="Магазин или шоурум"><span class="mark"></span><span class="txt">Магазин или шоурум</span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+
+    <fieldset data-q="q13" data-required data-max="2">
+      <legend><span class="n">13</span><span>Какие тенденции освещения вам хочется разобрать?</span></legend>
+      <p class="hint indent">Выберите до двух вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q13" value="Многоуровневый свет"><span class="mark"></span><span class="txt"><b>Многоуровневый свет</b><small>несколько уровней и сценариев вместо одной люстры в центре</small></span></label>
+        <label class="opt"><input type="checkbox" name="q13" value="Управление светом"><span class="mark"></span><span class="txt"><b>Современное управление светом</b><small>как включать свет, менять яркость и сценарии освещения</small></span></label>
+        <label class="opt"><input type="checkbox" name="q13" value="Трековые системы в квартире"><span class="mark"></span><span class="txt"><b>Трековые системы в квартире</b><small>модули, которые легко переставить вслед за мебелью</small></span></label>
+        <label class="opt"><input type="checkbox" name="q13" value="Скрытый архитектурный свет"><span class="mark"></span><span class="txt"><b>Скрытый архитектурный свет</b><small>световые линии, подсветка ниш и потолков без видимых светильников</small></span></label>
+        <label class="opt"><input type="checkbox" name="q13" value="Тактильный свет"><span class="mark"></span><span class="txt"><b>Тактильный свет</b><small>природные материалы и органичные формы светильников в интерьере</small></span></label>
+        <label class="opt"><input type="checkbox" name="q13" value="Светильник как арт-объект"><span class="mark"></span><span class="txt"><b>Светильник как арт-объект</b><small>скульптурные формы, которые становятся центром интерьера</small></span></label>
+        <label class="opt"><input type="checkbox" name="q13" value="Ретро-фьюжн"><span class="mark"></span><span class="txt"><b>Ретро-фьюжн</b><small>формы середины прошлого века в современном прочтении</small></span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+
+    <fieldset data-q="q14" data-required data-max="3">
+      <legend><span class="n">14</span><span>Что обязательно должно быть на этой встрече?</span></legend>
+      <p class="hint indent">Выберите до трёх вариантов.</p>
+      <div class="options indent">
+        <label class="opt"><input type="checkbox" name="q14" value="Экскурсия по шоуруму"><span class="mark"></span><span class="txt">Экскурсия по шоуруму</span></label>
+        <label class="opt"><input type="checkbox" name="q14" value="Разбор реализованных объектов"><span class="mark"></span><span class="txt">Разбор реализованных объектов</span></label>
+        <label class="opt"><input type="checkbox" name="q14" value="Кухня-гостиная шаг за шагом"><span class="mark"></span><span class="txt">Свет шаг за шагом на примере учебного проекта кухни-гостиной</span></label>
+        <label class="opt"><input type="checkbox" name="q14" value="Тенденции и новые коллекции"><span class="mark"></span><span class="txt">Тенденции и новые коллекции</span></label>
+        <label class="opt"><input type="checkbox" name="q14" value="Сравнение света вживую"><span class="mark"></span><span class="txt">Сравнение света вживую: тёплый и холодный, прозрачный и матовый плафон</span></label>
+        <label class="opt"><input type="checkbox" name="q14" value="Мини-практикум"><span class="mark"></span><span class="txt">Мини-практикум: подобрать светильник к интерьеру</span></label>
+        <label class="opt"><input type="checkbox" name="q14" value="Ответы на вопросы"><span class="mark"></span><span class="txt">Ответы на ваши вопросы</span></label>
+      </div>
+      <p class="err indent">Выберите хотя бы один вариант.</p>
+    </fieldset>
+
+    <fieldset data-q="q15">
+      <legend><span class="n">15</span><span>Какой вопрос о свете вы бы задали эксперту?</span></legend>
+      <p class="hint indent">Необязательно. Например, вопрос заказчика, который поставил вас в тупик, или ситуация из вашего проекта.</p>
+      <div class="indent">
+        <textarea name="q15" maxlength="1500" aria-label="Ваш вопрос эксперту"></textarea>
+      </div>
+    </fieldset>
+  </section>
+
+  <div class="submit-row">
+    <button type="submit" id="submitBtn">Отправить ответы</button>
+    <p class="form-msg" id="formMsg" role="alert"></p>
+  </div>
+</form>
+
+<div class="thanks" id="thanks" tabindex="-1">
+  <div class="beam b1"></div><div class="beam b2"></div>
+  <h2>Спасибо, ответы <b>отправлены</b></h2>
+  <p>Мы соберём встречу под интересы вашей группы. Ситуацию из вопроса 6 разберём вместе в шоуруме.</p>
+  <p>До встречи в Maytoni.</p>
+</div>
+</main>
+
+<footer>Maytoni Group · Анкета анонимная, ответы используются только для подготовки встречи</footer>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var SCRIPT_URL = (window.SURVEY_CONFIG && window.SURVEY_CONFIG.scriptUrl || "").trim();
+  var startedAt = Date.now();
+  var form = document.getElementById("survey");
+  var required = Array.prototype.slice.call(form.querySelectorAll("fieldset[data-required]"));
+  var fill = document.getElementById("fill");
+  var count = document.getElementById("count");
+
+  function checked(fs){ return fs.querySelectorAll("input:checked"); }
+  function answered(fs){ return checked(fs).length > 0; }
+
+  function progress(){
+    var done = required.filter(answered).length;
+    fill.style.width = (done / required.length * 100) + "%";
+    count.textContent = done + " из " + required.length;
+  }
+
+  function limits(fs){
+    var boxes = Array.prototype.slice.call(fs.querySelectorAll("input[type=checkbox]"));
+    if (!boxes.length) return;
+    var max = Number(fs.dataset.max) || Infinity;
+    var n = boxes.filter(function(b){ return b.checked; }).length;
+    boxes.forEach(function(b){ if (!b.checked) b.disabled = n >= max; });
+  }
+
+  form.addEventListener("change", function(e){
+    var t = e.target, fs = t.closest("fieldset");
+    if (!fs) return;
+    var ex = fs.dataset.exclusive;
+    if (ex && t.type === "checkbox" && t.checked){
+      fs.querySelectorAll("input[type=checkbox]").forEach(function(b){
+        if (b !== t && ((t.value === ex) || (b.value === ex))) b.checked = false;
+      });
+    }
+    limits(fs);
+    if (answered(fs)) fs.classList.remove("invalid");
+    progress();
+  });
+
+  function payload(){
+    var data = new URLSearchParams();
+    form.querySelectorAll("fieldset[data-q]").forEach(function(fs){
+      var key = fs.dataset.q, ta = fs.querySelector("textarea");
+      var val = ta ? ta.value.trim() : Array.prototype.map.call(checked(fs), function(i){ return i.value; }).join("; ");
+      data.append(key, val);
+    });
+    data.append("duration", Math.round((Date.now() - startedAt) / 1000));
+    return data;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var msg = document.getElementById("formMsg");
+    msg.textContent = "";
+    var missing = required.filter(function(fs){ return !answered(fs); });
+    required.forEach(function(fs){ fs.classList.toggle("invalid", missing.indexOf(fs) > -1); });
+    if (missing.length){
+      msg.textContent = "Остались вопросы без ответа: " + missing.length + ". Они отмечены выше.";
+      missing[0].scrollIntoView({block:"center"});
+      var first = missing[0].querySelector("input");
+      if (first) first.focus({preventScroll:true});
+      return;
+    }
+    if (!SCRIPT_URL){
+      msg.textContent = "Анкета пока не подключена к таблице: заполните адрес в файле config.js.";
+      return;
+    }
+    var btn = document.getElementById("submitBtn");
+    btn.disabled = true; btn.textContent = "Отправляем…";
+    fetch(SCRIPT_URL, {method:"POST", mode:"no-cors", body: payload()})
+      .then(function(){
+        form.style.display = "none";
+        var t = document.getElementById("thanks");
+        t.style.display = "block";
+        fill.style.width = "100%";
+        count.textContent = "Готово";
+        window.scrollTo(0, 0);
+        t.focus({preventScroll:true});
+      })
+      .catch(function(){
+        msg.textContent = "Ответы не отправились. Проверьте интернет и нажмите кнопку ещё раз.";
+        btn.disabled = false; btn.textContent = "Отправить ответы";
+      });
+  });
+
+  progress();
+})();
+</script>
+</body>
+</html>
